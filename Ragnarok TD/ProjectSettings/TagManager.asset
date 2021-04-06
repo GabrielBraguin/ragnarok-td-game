@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Projectile
+  - Attacker
+  - Tank
+  - Defender
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Defender
+  - Attacker
+  - Defender Projectile
+  - Attacker Projectile
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1342949289
+    locked: 0
+  - name: Tile
+    uniqueID: 489791847
+    locked: 0
+  - name: Player Projectiles
+    uniqueID: 3944741495
+    locked: 0
+  - name: Foreground
+    uniqueID: 1669439271
+    locked: 0
