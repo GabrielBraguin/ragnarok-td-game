@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,16 +11,29 @@ public class Shooter : MonoBehaviour
     Animator animator;
     [SerializeField] AudioClip shotSFX;
     float shotSFXvolume;
+    GameObject projectileParent;
+    const string PROJECTILE_PARENT_NAME = "Projectiles";
 
     private void Start()
-    {
-        shotSFXvolume = PlayerPrefsController.GetSFXVolume();
+    {        
         SetLaneSpawner();
         animator = GetComponent<Animator>();
+        CreateProjectileParent();
     }
+
+    private void CreateProjectileParent()
+    {
+        projectileParent = GameObject.Find(PROJECTILE_PARENT_NAME);
+        if (!projectileParent)
+        {
+            projectileParent = new GameObject(PROJECTILE_PARENT_NAME);
+        }
+    }
+
     private void Update()
     {
-        if(IsAttackerInLane())
+        shotSFXvolume = PlayerPrefsController.GetSFXVolume();
+        if (IsAttackerInLane())
         {
             animator.SetBool("isAttacking",true);
         }
@@ -57,7 +71,8 @@ public class Shooter : MonoBehaviour
 
     public void Fire()
     {
-        Instantiate(projectilePrefab, gunPrefab.transform.position, gunPrefab.transform.rotation);
+        GameObject newProjectile = Instantiate(projectilePrefab, gunPrefab.transform.position, gunPrefab.transform.rotation) as GameObject;
+        newProjectile.transform.parent = projectileParent.transform;
         if (!shotSFX) { return;  }
         AudioSource.PlayClipAtPoint(shotSFX, Camera.main.transform.position, shotSFXvolume);
     }

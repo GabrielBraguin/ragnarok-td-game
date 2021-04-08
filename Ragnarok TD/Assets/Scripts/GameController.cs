@@ -17,19 +17,13 @@ public class GameController : MonoBehaviour
     [SerializeField] public GameObject [] playerHeart;
     [SerializeField] GameObject winLabel;
     [SerializeField] GameObject loseLabel;
-    int numberOfAttackers = 0;
+    [SerializeField] GameObject optionsLabel;
+    [SerializeField] int numberOfAttackers = 0;
     bool levelTimerFinished = false;
     [SerializeField] AudioClip[] gameEndSFX;
     float gameEndSFXvolume;
     public bool gameOver = false;
     TimeController timeController;
-
-    [Header("Scene Loading settings")]
-    [SerializeField] Button startGameButton = null;
-    [SerializeField] Button optionsButton = null;
-    [SerializeField] Button mainMenuButton = null;
-    [SerializeField] Button tryAgainButton = null;
-    [SerializeField] Button quitGameButton = null;
     int currentSceneIndex;
 
     private void Awake()
@@ -42,8 +36,11 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        CheckButtons();        
-        gameEndSFXvolume = PlayerPrefsController.GetSFXVolume();        
+        currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if (currentSceneIndex == 0)
+        {
+            StartCoroutine(SplashScreenLoad());
+        }
         if (!slider) { return; }
         timeController = FindObjectOfType<TimeController>();
         timeController.StartGame();
@@ -52,9 +49,18 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
+        gameEndSFXvolume = PlayerPrefsController.GetSFXVolume();
         if (Input.GetKey("escape"))
         {
-            QuitGame();
+            if (slider)
+            {
+                timeController.StopGame();
+                optionsLabel.SetActive(true);
+            }
+            else
+            { 
+                QuitGame();
+            }
         }
         if (playerHealth <= 0)
         {
@@ -86,7 +92,7 @@ public class GameController : MonoBehaviour
     public void AttackerKilled()
     {
         numberOfAttackers--;
-        if (numberOfAttackers <= 0 && levelTimerFinished)
+        if (numberOfAttackers <= 0 && levelTimerFinished && playerHealth > 0)
         {
             StartCoroutine(HandleWinCondition());
         }
@@ -100,7 +106,6 @@ public class GameController : MonoBehaviour
         GetComponent<AudioSource>().Stop();
         AudioSource.PlayClipAtPoint(gameEndSFX[1], Camera.main.transform.position, gameEndSFXvolume);
         yield return new WaitForSeconds(3);
-        //timeController.StopGame();
         StartCoroutine(LoadNextScene());
     }
 
@@ -129,36 +134,15 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void ResumeGame()
+    {
+        timeController.StartGame();
+        optionsLabel.SetActive(false);
+        timeController.SetNormalSpeedButton();
+    }
+
     //Scene Loading settings procedures
 
-    private void CheckButtons()
-    {
-        currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        if (currentSceneIndex == 0)
-        {
-            StartCoroutine(SplashScreenLoad());
-        }
-        if (startGameButton)
-        {
-            startGameButton.onClick.AddListener(() => { SceneManager.LoadScene("04. Level 1"); });
-        }
-        if (optionsButton)
-        {
-            optionsButton.onClick.AddListener(() => { SceneManager.LoadScene("03. Options Screen"); });
-        }
-        if (mainMenuButton)
-        {
-            mainMenuButton.onClick.AddListener(() => LoadMainMenu());
-        }
-        if (tryAgainButton)
-        {
-            tryAgainButton.onClick.AddListener(() => { SceneManager.LoadScene(currentSceneIndex); }); //retry same scene
-        }
-        if (quitGameButton)
-        {
-            quitGameButton.onClick.AddListener(() => QuitGame());
-        }
-    }
     IEnumerator SplashScreenLoad()
     {
         yield return new WaitForSeconds(4);
@@ -174,6 +158,21 @@ public class GameController : MonoBehaviour
     public void LoadMainMenu()
     {
         SceneManager.LoadScene("02. Main Menu");
+    }
+
+    public void LoadOptionsScreen()
+    {
+        SceneManager.LoadScene("03. Options Screen");
+    }
+
+    public void LoadLevel1()
+    {
+        SceneManager.LoadScene("04. Level 1");
+    }
+
+    public void ReloadLevel()
+    {
+        SceneManager.LoadScene(currentSceneIndex);
     }
 
     public void QuitGame()

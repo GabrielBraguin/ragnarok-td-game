@@ -43,5 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3566d268ea03dad458f13ad207f7b544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameSpeed: 1
-  timeButton: []
+  timeButton: {fileID: 0}

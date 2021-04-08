@@ -9,9 +9,13 @@ public class Shredder : MonoBehaviour
     float loseHealthSFXvolume;
 
     private void Start()
+    {        
+        game = FindObjectOfType<GameController>();
+    }
+
+    private void Update()
     {
         loseHealthSFXvolume = PlayerPrefsController.GetSFXVolume();
-        game = FindObjectOfType<GameController>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

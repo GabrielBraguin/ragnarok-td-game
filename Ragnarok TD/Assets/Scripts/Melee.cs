@@ -11,13 +11,13 @@ public class Melee : MonoBehaviour
     float meleeHitSFXVolume;
 
     protected void Start()
-    {
-        meleeHitSFXVolume = PlayerPrefsController.GetSFXVolume();
+    {        
         animator = GetComponent<Animator>();
     }
 
     protected void Update()
     {
+        meleeHitSFXVolume = PlayerPrefsController.GetSFXVolume();
         if (!currentTarget || currentTarget.GetComponent<Health>().health <= 0)
         {
             animator.SetBool("isAttacking", false);

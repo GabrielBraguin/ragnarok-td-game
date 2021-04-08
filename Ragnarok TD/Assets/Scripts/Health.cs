@@ -16,9 +16,14 @@ public class Health : MonoBehaviour
     private void Start()
     {
         anim = gameObject.GetComponent<Animator>();
+        
+        if(CompareTag("Attacker")) { SetDifficultyAttackerHealthModifier(); }
+    }
+
+    private void Update()
+    {
         deathSFXvolume = PlayerPrefsController.GetSFXVolume();
         hurtSFXvolume = PlayerPrefsController.GetSFXVolume();
-        if(CompareTag("Attacker")) { SetDifficultyAttackerHealthModifier(); }
     }
 
     private void SetDifficultyAttackerHealthModifier()

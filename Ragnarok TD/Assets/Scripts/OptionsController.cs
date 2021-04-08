@@ -19,6 +19,7 @@ public class OptionsController : MonoBehaviour
     {
         musicVolumeSlider.value = PlayerPrefsController.GetMusicVolume();
         SFXVolumeSlider.value = PlayerPrefsController.GetSFXVolume();
+        if (!difficultySlider) { return; }
         difficultySlider.value = PlayerPrefsController.GetDifficulty();
         easyHeader = difficultyLevel[0].GetComponent<TextMeshProUGUI>();
         normalHeader = difficultyLevel[1].GetComponent<TextMeshProUGUI>();
@@ -37,6 +38,7 @@ public class OptionsController : MonoBehaviour
             Debug.LogWarning("No music player found.");
         }
 
+        if (!difficultySlider) { return; }
         switch (difficultySlider.value)
         {
             case 1:
@@ -66,6 +68,12 @@ public class OptionsController : MonoBehaviour
         PlayerPrefsController.SetSFXVolume(SFXVolumeSlider.value);
         PlayerPrefsController.SetDifficulty(difficultySliderValue);
         FindObjectOfType<GameController>().LoadMainMenu();
+    }
+
+    public void SaveAndExitLevelOptions()
+    {
+        PlayerPrefsController.SetMusicVolume(musicVolumeSlider.value);
+        PlayerPrefsController.SetSFXVolume(SFXVolumeSlider.value);
     }
 
     public void SetDefaults()

@@ -29,4 +29,9 @@ public class TimeController : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    public void SetNormalSpeedButton()
+    {
+        EventSystem.current.SetSelectedGameObject(timeButton);
+    }
+
 }

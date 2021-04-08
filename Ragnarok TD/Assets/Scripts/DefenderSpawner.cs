@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +6,45 @@ using UnityEngine;
 public class DefenderSpawner : MonoBehaviour
 {
     Defender defender;
+    public bool sellMode = false;
+    public Texture2D cursorTexture;
+    public CursorMode cursorMode = CursorMode.Auto;
+    public Vector2 hotSpot = Vector2.zero;
+    GameObject defenderParent;
+    const string DEFENDER_PARENT_NAME = "Defenders";
+
+    private void Start()
+    {
+        CreateDefenderParent();
+    }
+
+    private void CreateDefenderParent()
+    {
+        defenderParent = GameObject.Find(DEFENDER_PARENT_NAME);
+        if (!defenderParent)
+        {
+            defenderParent = new GameObject(DEFENDER_PARENT_NAME);
+        }
+    }
+
+    private void Update()
+    {
+        if(sellMode)
+        {
+            Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+        }
+        else
+        {
+            Cursor.SetCursor(null, Vector2.zero, cursorMode);
+        }        
+    }
+
     private void OnMouseDown()
     {
-        AttemptToPlaceDefenderAt(GetSquare());
+        if (!sellMode)
+        {
+            AttemptToPlaceDefenderAt(GetSquare());
+        }        
     }
 
     public void SetSelectedDefender (Defender defenderToSelect)
@@ -46,5 +83,6 @@ public class DefenderSpawner : MonoBehaviour
     {
 
         Defender newDefender = Instantiate(defender, roundedPos, Quaternion.identity) as Defender;
+        newDefender.transform.parent = defenderParent.transform;
     }
 }

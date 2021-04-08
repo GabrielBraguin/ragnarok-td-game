@@ -8,6 +8,8 @@ public class Attacker : MonoBehaviour
     [Range(0f, 3f)] [SerializeField] float currentSpeed = 1f;
     [SerializeField] bool facingRight = true; //Depends on if your animation is by default facing right or left
     public GameController game;
+    GameObject goldCoinParent;
+    const string GOLDCOIN_PARENT_NAME = "GoldCoins";
 
     private void Awake()
     {
@@ -19,6 +21,7 @@ public class Attacker : MonoBehaviour
     {
         if (facingRight)
             Flip();
+        CreateGoldCoinParent();
     }
 
     void Update()
@@ -30,6 +33,15 @@ public class Attacker : MonoBehaviour
     {
         if (game.gameOver) { return; }
         game.AttackerKilled();
+    }
+
+    private void CreateGoldCoinParent()
+    {
+        goldCoinParent = GameObject.Find(GOLDCOIN_PARENT_NAME);
+        if (!goldCoinParent)
+        {
+            goldCoinParent = new GameObject(GOLDCOIN_PARENT_NAME);
+        }
     }
 
     public void Flip()
@@ -67,6 +79,7 @@ public class Attacker : MonoBehaviour
         GameObject goldCoin = Instantiate(
             Resources.Load("GoldCoin", typeof(GameObject)), gameObject.transform.position, gameObject.transform.rotation) 
             as GameObject;
+        goldCoin.transform.parent = goldCoinParent.transform;
         Destroy(goldCoin, 1f);
     }
 
