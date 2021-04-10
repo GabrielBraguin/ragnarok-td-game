@@ -34,13 +34,18 @@ public class DamageDealer : MonoBehaviour
     }
 
     public void Hit()
-    {
+    {        
         TriggerHit();
         if (CompareTag("Projectile"))
         {
-            Destroy(transform.parent.gameObject);
+            Destroy(transform.parent.gameObject,0.02f);
+        }
+        else if (CompareTag("EnemyProjectile"))
+        {
+            Destroy(transform.parent.gameObject,0.05f);
         }
     }
+
 
     private void TriggerHit()
     {

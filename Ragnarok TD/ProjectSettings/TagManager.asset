@@ -8,6 +8,8 @@ TagManager:
   - Attacker
   - Tank
   - Defender
+  - PersistentProjectile
+  - EnemyProjectile
   layers:
   - Default
   - TransparentFX

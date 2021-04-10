@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8810515024894869652}
   - component: {fileID: 8810515024894869653}
   m_Layer: 8
-  m_Name: Knight 2 Axe
+  m_Name: Knight Axe
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 387d7de246ceecd45a3b516beae184cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 30
+  damage: 25
   hitVFX: {fileID: 1906222994913036, guid: 69a12d3072d4ef44d83d33a370a5e2f0, type: 3}
   hitSFX: {fileID: 8300000, guid: 4c082be9a3246674bbf5f29604d6d8fe, type: 3}
 --- !u!60 &8810515025334839890

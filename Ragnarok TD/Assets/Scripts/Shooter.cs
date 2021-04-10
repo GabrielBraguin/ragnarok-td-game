@@ -35,7 +35,7 @@ public class Shooter : MonoBehaviour
         shotSFXvolume = PlayerPrefsController.GetSFXVolume();
         if (IsAttackerInLane())
         {
-            animator.SetBool("isAttacking",true);
+            animator.SetBool("isAttacking", true);
         }
         else
         {
@@ -73,6 +73,10 @@ public class Shooter : MonoBehaviour
     {
         GameObject newProjectile = Instantiate(projectilePrefab, gunPrefab.transform.position, gunPrefab.transform.rotation) as GameObject;
         newProjectile.transform.parent = projectileParent.transform;
+        if (newProjectile.CompareTag("PersistentProjectile"))
+        {
+            Destroy(newProjectile, 1f);
+        }        
         if (!shotSFX) { return;  }
         AudioSource.PlayClipAtPoint(shotSFX, Camera.main.transform.position, shotSFXvolume);
     }

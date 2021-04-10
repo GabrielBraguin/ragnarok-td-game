@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3813603740497492619}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7246657392469254208}
@@ -153,6 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentSpeed: 0.8
   facingRight: 1
+  game: {fileID: 0}
 --- !u!114 &609044730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,9 +167,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
-  HitVFX: {fileID: 0}
-  HitSFX: {fileID: 0}
-  HitSFXvolume: 0.25
+  hitVFX: {fileID: 0}
+  hitSFX: {fileID: 0}
 --- !u!114 &609044731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,9 +186,7 @@ MonoBehaviour:
   deathSFX:
   - {fileID: 8300000, guid: 083f3a7480646f54cae20a10ddf54471, type: 3}
   - {fileID: 8300000, guid: b8e3464c7f8e48e41b404d7ff46fae0b, type: 3}
-  deathSFXvolume: 0.1
   hurtSFX: {fileID: 8300000, guid: 055296b9bc97e554cb2e60e45dd34691, type: 3}
-  hurtSFXvolume: 0.1
 --- !u!50 &1467838474
 Rigidbody2D:
   serializedVersion: 4
@@ -346,4 +344,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meleeHitSFX: {fileID: 8300000, guid: 3006a607e4f72ff47ae243ec846f1195, type: 3}
-  meleeHitSFXVolume: 0.4

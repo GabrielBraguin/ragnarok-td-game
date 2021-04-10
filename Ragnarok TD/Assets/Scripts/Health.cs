@@ -55,7 +55,7 @@ public class Health : MonoBehaviour
         {            
             Die();
         }
-        else if (damageDealer.CompareTag("Projectile") || damageDealer.CompareTag("Tank")) 
+        else if (damageDealer.CompareTag("Projectile") || damageDealer.CompareTag("EnemyProjectile") || damageDealer.CompareTag("PersistentProjectile") || damageDealer.CompareTag("Tank")) 
         {
             anim.Play("Hurt");
             if (!hurtSFX) { return; }

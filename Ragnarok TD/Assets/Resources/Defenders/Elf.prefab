@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3696648242635755911}
   m_Layer: 6
   m_Name: Body Sprite
-  m_TagString: Untagged
+  m_TagString: Defender
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,8 +129,8 @@ GameObject:
   - component: {fileID: 8092634072488500819}
   - component: {fileID: 4263818177818511467}
   m_Layer: 6
-  m_Name: Elf 1
-  m_TagString: Untagged
+  m_Name: Elf
+  m_TagString: Defender
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -4,54 +4,45 @@ using UnityEngine;
 
 public class AttackerSpawner : MonoBehaviour
 {
-    [Range(0f,10f)][SerializeField] float minSpawnDelay = 1f;
-    [Range(0.1f,20f)][SerializeField] float maxSpawnDelay = 5f;
-    float startingMinSpawnDelay, startingMaxSpawnDelay;
-    [SerializeField] float difficultyFactor = 0.2f;
-    [SerializeField] Attacker [] attackerPreFab;
+    [SerializeField] List<WaveConfig> waveConfigs;
+    [SerializeField] int startingWave = 0;
     float attackersSpawned = 0;
     bool spawn = true;
 
-    private void Start()
-    {
-        startingMinSpawnDelay = minSpawnDelay;
-        startingMaxSpawnDelay = maxSpawnDelay;
-    }
 
     public IEnumerator StartWave()
     {
         while (spawn)
         {
-            SpawnAttacker();
-            attackersSpawned += 1;
-            IncrementDifficultyTimer();
-            yield return new WaitForSeconds(Random.Range(minSpawnDelay, maxSpawnDelay));
+            yield return StartCoroutine(SpawnAllWaves());
         }
     }
 
-    private void IncrementDifficultyTimer()
+    private IEnumerator SpawnAllWaves()
     {
-        if (minSpawnDelay >= 1f)
+        for (int waveIndex = startingWave; waveIndex < waveConfigs.Count; waveIndex++)
         {
-            minSpawnDelay = startingMinSpawnDelay - (attackersSpawned * difficultyFactor);
+            var currentWave = waveConfigs[waveIndex];
+            yield return StartCoroutine(SpawnAllEnemiesInWave(currentWave));
         }
-        if (maxSpawnDelay >= 2f)
+    }
+
+    private IEnumerator SpawnAllEnemiesInWave(WaveConfig waveConfig)
+    {
+        for (int enemyCount = 0; enemyCount < waveConfig.NumberOfEnemies; enemyCount++)
         {
-            maxSpawnDelay = startingMaxSpawnDelay - (attackersSpawned * (difficultyFactor));
-        }        
+            if(FindObjectOfType<GameController>().levelTimerFinished == false) 
+            {
+                var newEnemy = Instantiate(waveConfig.EnemyPrefab, transform.position, transform.rotation);
+                newEnemy.transform.parent = transform;
+                attackersSpawned += 1;
+            }
+            yield return new WaitForSeconds(Random.Range(waveConfig.MinSpawnDelay, waveConfig.MaxSpawnDelay));
+        }
     }
 
     public void StopSpawning()
     {
         spawn = false;
     }
-
-    private void SpawnAttacker()
-    {
-        Attacker newAttacker = Instantiate
-            (attackerPreFab[UnityEngine.Random.Range(0, attackerPreFab.Length)], transform.position, transform.rotation) 
-            as Attacker;
-        newAttacker.transform.parent = transform;
-    }
-
 }

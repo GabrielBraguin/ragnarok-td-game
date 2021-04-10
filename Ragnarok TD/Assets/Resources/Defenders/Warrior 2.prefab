@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9197160367201109750}
   m_Layer: 6
   m_Name: Body Sprite
-  m_TagString: Untagged
+  m_TagString: Defender
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ab2bdf306d73745ac9877beb5123c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 300
+  health: 250
   deathAnimationTime: 1.5
   deathSFX:
   - {fileID: 8300000, guid: 54e476b16cd16e5458c5fedd45fa5d3b, type: 3}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7296080333892649115}
   m_Layer: 6
   m_Name: Body Sprite
-  m_TagString: Untagged
+  m_TagString: Defender
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7450f1b33bcf5744399ad741d0fc8f9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goldCost: 100
+  goldCost: 150
 --- !u!114 &7296080334379666412
 MonoBehaviour:
   m_ObjectHideFlags: 0
