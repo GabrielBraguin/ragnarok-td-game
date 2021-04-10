@@ -54,7 +54,7 @@ public class Melee : MonoBehaviour
     {
 
         Health health = currentTarget.GetComponent<Health>();
-        if (!currentTarget || health.health <= 0) { return; }
+        if (!currentTarget || health.health <= 0 || !currentTarget.gameObject) { return; }
         if (health)
         {
             health.ProcessHit(GetComponent<DamageDealer>());

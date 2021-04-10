@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 387d7de246ceecd45a3b516beae184cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 15
+  damage: 20
   hitVFX: {fileID: 0}
   hitSFX: {fileID: 0}
 --- !u!114 &9197160367788756354
@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ab2bdf306d73745ac9877beb5123c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 250
+  health: 300
   deathAnimationTime: 1.5
   deathSFX:
   - {fileID: 8300000, guid: 54e476b16cd16e5458c5fedd45fa5d3b, type: 3}

@@ -25,8 +25,6 @@ public class GameController : MonoBehaviour
     public bool gameOver = false;
     TimeController timeController;
     int currentSceneIndex;
-    public Texture2D cursorTexture;
-    public CursorMode cursorMode = CursorMode.Auto;
 
     private void Awake()
     {
@@ -159,7 +157,6 @@ public class GameController : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        Cursor.SetCursor(null, Vector2.zero, cursorMode);
         SceneManager.LoadScene("02. Main Menu");
     }
 
